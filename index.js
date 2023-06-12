@@ -49,6 +49,16 @@ const resolvers = {
 
       tweets.push(newTweet);
       return newTweet;
+    },
+    updateTweet: (_, { id, liked }) => {
+      const tweetIndex = tweets.findIndex((tweet) => tweet.id === id);
+
+      if (tweetIndex === -1) {
+        throw new Error('Tweet not found');
+      }
+
+      tweets[tweetIndex].liked = liked;
+      return tweets[tweetIndex];
     }
   },
 };

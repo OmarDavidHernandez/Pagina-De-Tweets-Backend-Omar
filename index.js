@@ -59,7 +59,18 @@ const resolvers = {
 
       tweets[tweetIndex].liked = liked;
       return tweets[tweetIndex];
-    }
+    },
+    deleteTweet: (_, { id }) => {
+      const tweetIndex = tweets.findIndex((tweet) => tweet.id === id);
+
+      if (tweetIndex === -1) {
+        throw new Error('Tweet not found');
+      }
+
+      const deletedTweet = tweets[tweetIndex];
+      tweets.splice(tweetIndex, 1);
+      return deletedTweet;
+    },
   },
 };
 
